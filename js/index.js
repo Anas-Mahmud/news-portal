@@ -8,10 +8,19 @@ const setAllCategories = async () => {
     const allCategories = await loadAllnews();
     const categories = document.getElementById('categories');
     for (const category of allCategories) {
+        // console.log(category);
         const li = document.createElement('li');
-        li.innerHTML = `<a>${category.category_name}</a>`;
+        li.innerHTML = `<a onclick="loadCategory()">${category.category_name}</a>`;
         categories.appendChild(li);
     }
 }
+
+const loadCategory = async () => {
+    const url = `https://openapi.programming-hero.com/api/news/category/08`
+    const res = await fetch(url)
+    const data = await res.json()
+    console.log(data.data[0].category_id)
+}
+
 
 setAllCategories();
