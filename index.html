@@ -6,10 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- daisy ui  -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="w-10/12 mx-auto">
+    <header class="mt-5">
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+                <h1 class="normal-case text-4xl font-semibold">daisyUI</h1>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal p-0 text-xl font-semibold">
+                    <li><a>News</a></li>
+                    <li><a>Blog</a></li>
+                    <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full">
+                            <img src="images/Avatar.png" />
+                        </div>
+                    </label>
+                </ul>
+            </div>
+        </div>
+        <hr class="m-5">
+    </header>
+    <main>
+        <div>
+            <ul id="categories" class="flex flex-row place-content-around text-xl font-semibold">
+            </ul>
+        </div>
+    </main>
 
+
+    <script src="js/index.js"></script>
 </body>
 
 </html>
