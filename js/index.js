@@ -17,7 +17,6 @@ const setAllCategories = async () => {
         const li = document.createElement('li');
         li.innerHTML = `<a onclick="loadCategory('${categoryId.category_id}')">${categoryId.category_name}</a>`;
         categories.appendChild(li);
-        // console.log(categoryId.category_id);
     }
 }
 
