@@ -22,7 +22,7 @@ const loadCategory = async (categories) => {
     const res = await fetch(url)
     const data = await res.json()
     const categoriesData = data.data;
-    console.log(categoriesData);
+    // console.log(categoriesData);
 
     const categoryNews = document.getElementById('category-news');
     categoryNews.textContent = "";
@@ -31,10 +31,11 @@ const loadCategory = async (categories) => {
 
     if (categoriesData.length === 0) {
         notFound.innerHTML = `<h3 class="text-2xl text-amber-400 text-center">No News Found...!!</h3>`;
+        return;
     }
 
     for (category of categoriesData) {
-        console.log(category);
+        // console.log(category);
         const { _id, total_view, title, author, thumbnail_url, details } = category;
         const div = document.createElement('div');
         div.innerHTML = `
@@ -54,15 +55,33 @@ const loadCategory = async (categories) => {
                             </div>
                         </div>
                         <h3> <i class="fa-regular fa-eye"></i> ${total_view ? total_view : "No views"} M</h3>
-                        <i class="fa-solid fa-angles-right"></i>
+                        <label for="my-modal-3" onclick="showModal('${_id}')" class="btn modal-button">Details</label>
                     </div>
                 </div>
             </div>
-
         `;
         categoryNews.appendChild(div);
     };
 
+
+}
+
+const showModal = async (_id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${_id}`
+    const res = await fetch(url)
+    const data = await res.json();
+    const categoriesNews = data.data;
+
+    const modalBody = document.getElementById('modal-body');
+    modalBody.textContent = "";
+    for (news of categoriesNews) {
+        const div = document.createElement('div');
+        div.innerHTML = `
+        <img src="${news.image_url}" alt="">
+        <p class="py-4">${news.details}</p>
+        `;
+        modalBody.appendChild(div);
+    }
 }
 
 setAllCategories();
