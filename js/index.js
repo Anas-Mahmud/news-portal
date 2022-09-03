@@ -25,11 +25,23 @@ const loadCategory = async (categories) => {
     // console.log(categoriesData);
 
     const categoryNews = document.getElementById('category-news');
+    categoryNews.textContent = "";
     for (category of categoriesData) {
         console.log(category);
+        const { _id, rating, total_view, title, author, thumbnail_url, details } = category;
         const div = document.createElement('div');
         div.innerHTML = `
-        <h1>hello</h1>
+            <div class="card card-side bg-base-100 shadow-xl m-5">
+                <figure><img class="w-full" src="${thumbnail_url}" alt=""></figure>
+                <div class="card-body w-full">
+                    <h2 class="card-title">${title}</h2>
+                    <p>${details.length > 400 ? details.slice(0, 400) + " ..." : details}</p>
+                    <div class="card-actions justify-end">
+                        <i class="fa-solid fa-angles-right"></i>
+                    </div>
+                </div>
+            </div>
+
         `;
         categoryNews.appendChild(div);
     };
