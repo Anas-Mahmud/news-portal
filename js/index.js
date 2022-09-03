@@ -18,6 +18,11 @@ const setAllCategories = async () => {
 
 const loadCategory = async (categories) => {
     // console.log(categories);
+
+    // spinner
+    const spinner = document.createElement('spinner');
+    spinner.classList.remove("hidden");
+
     const url = `https://openapi.programming-hero.com/api/news/category/${categories}`
     const res = await fetch(url)
     const data = await res.json()
@@ -34,12 +39,14 @@ const loadCategory = async (categories) => {
         return;
     }
 
+    spinner.classList.add("hidden");
+
     for (category of categoriesData) {
         // console.log(category);
         const { _id, total_view, title, author, thumbnail_url, details } = category;
         const div = document.createElement('div');
         div.innerHTML = `
-            <div class="card card-side bg-base-100 shadow-xl m-5">
+            <div class="card lg:card-side bg-base-100 shadow-xl m-5">
                 <figure><img class="w-full" src="${thumbnail_url}" alt=""></figure>
                 <div class="card-body w-full">
                     <h2 class="card-title">${title}</h2>
