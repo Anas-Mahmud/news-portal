@@ -22,13 +22,20 @@ const loadCategory = async (categories) => {
     const res = await fetch(url)
     const data = await res.json()
     const categoriesData = data.data;
-    // console.log(categoriesData);
+    console.log(categoriesData);
 
     const categoryNews = document.getElementById('category-news');
     categoryNews.textContent = "";
+    const notFound = document.getElementById('not-found');
+    notFound.textContent = "";
+
+    if (categoriesData.length === 0) {
+        notFound.innerHTML = `<h3 class="text-2xl text-amber-400 text-center">No News Found...!!</h3>`;
+    }
+
     for (category of categoriesData) {
         console.log(category);
-        const { _id, rating, total_view, title, author, thumbnail_url, details } = category;
+        const { _id, total_view, title, author, thumbnail_url, details } = category;
         const div = document.createElement('div');
         div.innerHTML = `
             <div class="card card-side bg-base-100 shadow-xl m-5">
@@ -36,7 +43,17 @@ const loadCategory = async (categories) => {
                 <div class="card-body w-full">
                     <h2 class="card-title">${title}</h2>
                     <p>${details.length > 400 ? details.slice(0, 400) + " ..." : details}</p>
-                    <div class="card-actions justify-end">
+                    <div class="card-actions justify-between">
+                        <div class="flex">
+                            <div class="my-auto mr-3">
+                                <img class="w-10 h-10 rounded-full" src="${author.img}" alt="">
+                            </div>
+                            <div>
+                                <h3>${author.name ? author.name : "Author not found"}</h3>
+                                <p>${author.published_date}</p>
+                            </div>
+                        </div>
+                        <h3> <i class="fa-regular fa-eye"></i> ${total_view ? total_view : "No views"} M</h3>
                         <i class="fa-solid fa-angles-right"></i>
                     </div>
                 </div>
