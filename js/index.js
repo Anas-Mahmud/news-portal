@@ -31,8 +31,9 @@ const loadCategory = async (categories) => {
         div.innerHTML = `
         <h1>hello</h1>
         `;
-    }
-    categoryNews.appendChild(div);
+        categoryNews.appendChild(div);
+    };
+
 }
 
 setAllCategories();
