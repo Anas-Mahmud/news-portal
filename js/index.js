@@ -1,7 +1,12 @@
 const loadAllnews = async () => {
-    const res = await fetch("https://openapi.programming-hero.com/api/news/categories")
-    const data = await res.json()
-    return data.data.news_category;
+    try {
+        const res = await fetch("https://openapi.programming-hero.com/api/news/categories")
+        const data = await res.json()
+        return data.data.news_category;
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 const setAllCategories = async () => {
@@ -27,7 +32,7 @@ const loadCategory = async (categories) => {
     const res = await fetch(url)
     const data = await res.json()
     const categoriesData = data.data;
-    // console.log(categoriesData);
+    console.log(categoriesData);
 
     const categoryNews = document.getElementById('category-news');
     categoryNews.textContent = "";
@@ -35,8 +40,11 @@ const loadCategory = async (categories) => {
     notFound.textContent = "";
 
     if (categoriesData.length === 0) {
-        notFound.innerHTML = `<h3 class="text-2xl text-amber-400 text-center">No News Found...!!</h3>`;
+        notFound.innerHTML = `<h3 class="text-3xl text-amber-400 text-center mt-20">No News Found...!!</h3>`;
         return;
+    }
+    else {
+        notFound.innerHTML = `<h3 class="text-2xl text-emerald-600 text-center mt-10">${categoriesData.length} News Items Founs</h3>`;
     }
 
     spinner.classList.add("hidden");
@@ -61,7 +69,7 @@ const loadCategory = async (categories) => {
                                 <p>${author.published_date}</p>
                             </div>
                         </div>
-                        <h3> <i class="fa-regular fa-eye"></i> ${total_view ? total_view : "No views"} M</h3>
+                        <h3> <i class="fa-regular fa-eye"></i> ${total_view ? total_view + "M" : "No views yet"}</h3>
                         <label for="my-modal-3" onclick="showModal('${_id}')" class="btn modal-button">Details</label>
                     </div>
                 </div>
