@@ -44,7 +44,7 @@ const loadCategory = async (categories) => {
         return;
     }
     else {
-        notFound.innerHTML = `<h3 class="text-2xl text-emerald-600 text-center mt-10">${categoriesData.length} News Items Founs</h3>`;
+        notFound.innerHTML = `<h3 class="text-2xl text-emerald-600 text-center mt-10">${categoriesData.length} News Items Found</h3>`;
     }
 
     spinner.classList.add("hidden");
