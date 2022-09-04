@@ -21,7 +21,6 @@ const setAllCategories = async () => {
 }
 
 const loadCategory = async (categories) => {
-    // console.log(categories);
 
     // spinner
     const spinner = document.createElement('spinner');
@@ -38,6 +37,8 @@ const loadCategory = async (categories) => {
     const notFound = document.getElementById('not-found');
     notFound.textContent = "";
 
+    spinner.classList.add("hidden");
+
     if (categoriesData.length === 0) {
         notFound.innerHTML = `<h3 class="text-3xl text-amber-400 text-center mt-20">No News Found...!!</h3>`;
         return;
@@ -45,8 +46,6 @@ const loadCategory = async (categories) => {
     else {
         notFound.innerHTML = `<h3 class="text-2xl text-emerald-600 text-center mt-10">${categoriesData.length} News Items Found</h3>`;
     }
-
-    spinner.classList.add("hidden");
 
     for (category of categoriesData) {
         // console.log(category);
